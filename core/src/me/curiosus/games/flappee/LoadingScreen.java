@@ -22,6 +22,8 @@ public class LoadingScreen extends ScreenAdapter {
     private float progress = 0.0f;
     private final FlappeeGame flappeeGame;
 
+    private int counter = 0;
+
     public LoadingScreen(FlappeeGame game) {
         flappeeGame = game;
     }
@@ -39,7 +41,6 @@ public class LoadingScreen extends ScreenAdapter {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         shapeRenderer = new ShapeRenderer();
 
-        System.out.println("LoadingScreen " + flappeeGame.hashCode());
         flappeeGame.getAssetManager().load("core/assets/bg.png", Texture.class);
         flappeeGame.getAssetManager().load("core/assets/flappee.png", Texture.class);
         flappeeGame.getAssetManager().load("core/assets/flowerbottom.png", Texture.class);
@@ -62,7 +63,7 @@ public class LoadingScreen extends ScreenAdapter {
 
     private void update() {
         if (flappeeGame.getAssetManager().update()) {
-            flappeeGame.setScreen(new StartScreen(flappeeGame));
+            flappeeGame.setScreen(new GameScreen(flappeeGame));
         } else {
             progress = flappeeGame.getAssetManager().getProgress();
         }
