@@ -1,0 +1,55 @@
+
+flappee_assets.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bg
+  rotate: false
+  xy: 2, 270
+  size: 1280, 960
+  orig: 1280, 960
+  offset: 0, 0
+  index: -1
+flappee
+  rotate: false
+  xy: 1115, 202
+  size: 132, 66
+  orig: 132, 66
+  offset: 0, 0
+  index: -1
+flowerbottom
+  rotate: false
+  xy: 1284, 783
+  size: 13, 447
+  orig: 13, 447
+  offset: 0, 0
+  index: -1
+flowertop
+  rotate: false
+  xy: 2, 2
+  size: 66, 66
+  orig: 66, 66
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 2, 70
+  size: 192, 96
+  orig: 192, 96
+  offset: 0, 0
+  index: -1
+playpressed
+  rotate: false
+  xy: 1299, 1134
+  size: 192, 96
+  orig: 192, 96
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 2, 168
+  size: 1111, 100
+  orig: 1111, 100
+  offset: 0, 0
+  index: -1
