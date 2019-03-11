@@ -2,6 +2,7 @@ package me.curiosus.games.flappee;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
@@ -92,7 +93,7 @@ public class Flower {
 
     }
 
-    public void draw(SpriteBatch batch, Texture flowerBottom, Texture flowerTop) {
+    public void draw(SpriteBatch batch, TextureRegion flowerBottom, TextureRegion flowerTop) {
         batch.draw(flowerBottom,
                    floorCollisionRectangle.x,
                    floorCollisionRectangle.y,

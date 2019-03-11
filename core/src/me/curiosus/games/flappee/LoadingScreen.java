@@ -3,6 +3,7 @@ package me.curiosus.games.flappee;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -40,11 +41,12 @@ public class LoadingScreen extends ScreenAdapter {
         camera.update();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         shapeRenderer = new ShapeRenderer();
+        flappeeGame.getAssetManager().load("core/assets/flappee_assets.atlas", TextureAtlas.class);
 
-        flappeeGame.getAssetManager().load("core/assets/bg.png", Texture.class);
-        flappeeGame.getAssetManager().load("core/assets/flappee.png", Texture.class);
-        flappeeGame.getAssetManager().load("core/assets/flowerbottom.png", Texture.class);
-        flappeeGame.getAssetManager().load("core/assets/flowertop.png", Texture.class);
+//        flappeeGame.getAssetManager().load("core/assets/bg.png", Texture.class);
+//        flappeeGame.getAssetManager().load("core/assets/flappee.png", Texture.class);
+//        flappeeGame.getAssetManager().load("core/assets/flowerbottom.png", Texture.class);
+//        flappeeGame.getAssetManager().load("core/assets/flowertop.png", Texture.class);
         flappeeGame.getAssetManager().finishLoading();
 
     }

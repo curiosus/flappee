@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
@@ -17,6 +15,7 @@ public class GameScreen extends ScreenAdapter {
 
     public static final float WORLD_WIDTH = 2 * 640;
     public static final float WORLD_HEIGHT = 2 * 480;
+
     private static final float GAP_BETWEEN_FLOWERS = 400F;
 
     private ShapeRenderer shapeRenderer;
@@ -31,10 +30,10 @@ public class GameScreen extends ScreenAdapter {
     private BitmapFont bitmapFont;
     private GlyphLayout glyphLayout;
 
-    private Texture background;
-    private Texture flowerBottom;
-    private Texture flowerTop;
-    private Texture flappeeTexture;
+    private TextureRegion background;
+    private TextureRegion flowerBottom;
+    private TextureRegion flowerTop;
+    private TextureRegion flappeeTexture;
     private FlappeeGame flappeeGame;
 
 
@@ -51,15 +50,15 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
         System.out.println("GameScreen " + flappeeGame.hashCode());
-        flappeeTexture = flappeeGame.getAssetManager().get("core/assets/flappee.png");
-        flappee = new Flappee(flappeeTexture);
-        flappee.setPosition(WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
+        TextureAtlas textureAtlas = flappeeGame.getAssetManager().get("core/assets/flappee_assets.atlas");
         flowers = new Array<Flower>();
         bitmapFont = new BitmapFont();
         glyphLayout = new GlyphLayout();
-        background = flappeeGame.getAssetManager().get("core/assets/bg.png");
-        flowerBottom = flappeeGame.getAssetManager().get("core/assets/flowerbottom.png");
-        flowerTop = flappeeGame.getAssetManager().get("core/assets/flowertop.png");
+        flappee = new Flappee(textureAtlas.findRegion("flappee"));
+        flappee.setPosition(WORLD_WIDTH / 4, WORLD_HEIGHT / 2);
+        background = textureAtlas.findRegion("bg");
+        flowerBottom = textureAtlas.findRegion("flowerbottom");
+        flowerTop = textureAtlas.findRegion("flowertop");
     }
 
     private void drawScore() {
@@ -78,13 +77,14 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.setProjectionMatrix(camera.projection);
         shapeRenderer.setTransformMatrix(camera.view);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//        flappee.drawDebug(shapeRenderer);
-//        drawFlowers();
+        flappee.drawDebug(shapeRenderer);
+        drawFlowers();
         shapeRenderer.end();
         update(delta);
     }
 
     private void draw() {
+       batch.totalRenderCalls = 0;
        batch.setProjectionMatrix(camera.projection);
        batch.setTransformMatrix(camera.view);
        batch.begin();
@@ -95,6 +95,7 @@ public class GameScreen extends ScreenAdapter {
             flower.draw(batch, flowerBottom, flowerTop);
         }
        batch.end();
+       Gdx.app.log("Debug", String.valueOf(batch.totalRenderCalls));
     }
 
     private void update(float delta) {
